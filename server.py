@@ -43,3 +43,53 @@ class BlogPost(db.Model):
     body = db.Column(db.String(200))
     date = db.Column(db.Date)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+
+
+@app.route("/user", methods=['POST'])
+def create_user():
+    pass
+
+
+@app.route("/user/descending_id", methods=['POST'])
+def get_all_users_descending():
+    pass
+
+
+@app.route("/user/ascending_id", methods=['POST'])
+def get_all_users_ascending():
+    pass
+
+
+@app.route("/user/<user_id>", methods=['GET'])
+def get_one_use(user_id):
+    pass
+
+
+@app.route("/user/<user_id>", methods=['DELETE'])
+def delete_user_id(user_id):
+    pass
+
+
+# Blogpost routes
+@app.route("/blog_post/<user_id>", methods=["POST"])
+def create_blog_post(user_id):
+    pass
+
+
+@app.route("/blog_post/<user_id>", methods=['GET'])
+def get_all_blog_post(user_id):
+    pass
+
+
+@app.route("/blog_post/<blog_post_id>", methods=['GET'])
+def get_one_blog_post(blog_post_id):
+    pass
+
+
+@app.route("/blog_post/<blog_post_id>", methods=['DELETE'])
+def delete_blog_post(blog_post_id):
+    pass
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
