@@ -62,7 +62,7 @@ def create_user():
     return jsonify({"message": "User Created"}), 200
 
 
-@app.route("/user/descending_id", methods=['POST'])
+@app.route("/user/descending_id", methods=['GET'])
 def get_all_users_descending():
     users = User.query.all()
     ll = LinkedList()
@@ -78,7 +78,7 @@ def get_all_users_descending():
     return jsonify(ll.to_array()), 200
 
 
-@app.route("/user/ascending_id", methods=['POST'])
+@app.route("/user/ascending_id", methods=['GET'])
 def get_all_users_ascending():
     users = User.query.all()
     ll = LinkedList()
@@ -95,8 +95,19 @@ def get_all_users_ascending():
 
 
 @app.route("/user/<user_id>", methods=['GET'])
-def get_one_use(user_id):
-    pass
+def get_one_user(user_id):
+    users = User.query.all()
+    ll = LinkedList()
+    for user in users:
+        ll.insert_end({
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "address": user.address,
+            "phone": user.phone,
+        })
+    # print(user_id, type(user_id))
+    return ll.get_user_by_id(user_id)
 
 
 @app.route("/user/<user_id>", methods=['DELETE'])
