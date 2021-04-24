@@ -42,15 +42,32 @@ class LinkedList:
             n = n.next
         return l
 
+    def get_user_by_id(self, user_id):
+        node = self.head
+        while node:
+            if node.data['id'] is int(user_id):
+                return node.data, 200
+            node = node.next
+        return {"Message": "No User Found with the given user_id"}, 404
+
 
 if __name__ == "__main__":
     ll = LinkedList()
-    ll.insert_beginning(1)
-    ll.insert_beginning(2)
-    ll.insert_beginning(3)
-    # ll.print_LL()
-    ll.insert_end(4)
-    ll.insert_end(5)
-    # ll.print_LL()
+    # ll.insert_beginning(1)
+    # ll.insert_beginning(2)
+    # ll.insert_beginning(3)
+    # # ll.print_LL()
+    # ll.insert_end(4)
+    # ll.insert_end(5)
+    # # ll.print_LL()
+    d = {
+        "address": "785 Jessica Points Suite 670\nNew Mark, UT 56553",
+        "email": "Tony_Turner@email.com",
+        "id": 200,
+        "name": "Tony Turner",
+        "phone": "7142755042122"
+    }
+    ll.insert_beginning(d)
     lst = ll.to_array()
-    print(lst)
+    # print(lst)
+    print(ll.get_user_by_id(200))
