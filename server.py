@@ -5,6 +5,8 @@ from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from flask_sqlalchemy import SQLAlchemy
 
+from linked_list import LinkedList
+
 
 # configure sqlite3 to enforce foreign key constraints
 @event.listens_for(Engine, "connect")
@@ -62,7 +64,18 @@ def create_user():
 
 @app.route("/user/descending_id", methods=['POST'])
 def get_all_users_descending():
-    pass
+    users = User.query.all()
+    ll = LinkedList()
+    for user in users:
+        ll.insert_beginning({
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "address": user.address,
+            "phone": user.phone,
+        })
+
+    return jsonify(ll.to_array())
 
 
 @app.route("/user/ascending_id", methods=['POST'])
