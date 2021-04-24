@@ -34,7 +34,7 @@ class User(db.Model):
     email = db.Column(db.String(100))
     address = db.Column(db.String(200))
     phone = db.Column(db.String(10))
-    posts = db.relationship("BlogPost")
+    posts = db.relationship("BlogPost", cascade="all, delete")
 
 
 class BlogPost(db.Model):
@@ -112,7 +112,11 @@ def get_one_user(user_id):
 
 @app.route("/user/<user_id>", methods=['DELETE'])
 def delete_user_id(user_id):
-    pass
+    user = User.query.filter_by(id=user_id).first()
+    db.session.delete(user)
+    db.session.commit()
+    # print("user deleted")
+    return jsonify({}), 200
 
 
 # Blogpost routes
