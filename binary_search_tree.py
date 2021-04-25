@@ -1,6 +1,3 @@
-from re import search
-
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -33,10 +30,10 @@ class BST:
             return node.data
         else:
             if int(id) < node.data['id']:
-                search(id, node.left)
+                self.search(id, node.left)
 
             elif int(id) > node.data['id']:
-                search(id, node.right)
+                self.search(id, node.right)
             else:
                 return False
 
