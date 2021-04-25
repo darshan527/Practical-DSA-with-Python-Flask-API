@@ -41,7 +41,7 @@ class HashTable:
             else:
                 while val:
                     if val.data.key is key:
-                        return val.data
+                        return val.data.value
                     val = val.next
         return None
 
@@ -64,4 +64,6 @@ if __name__ == "__main__":
     ht.add_data("hi", "there")
     ht.add_data("hi", "hello")
     ht.add_data("hi", "human")
+    ht.add_data("title", "Jack and jill")
+    print(ht.get_value("title"))
     ht.print_table()
