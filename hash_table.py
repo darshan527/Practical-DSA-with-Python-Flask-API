@@ -37,7 +37,7 @@ class HashTable:
         val = self.hash_table[hashed_key]
         if val is not None:
             if val.next is None:
-                return val.data
+                return val.data.value
             else:
                 while val:
                     if val.data.key is key:
@@ -61,9 +61,13 @@ class HashTable:
 
 if __name__ == "__main__":
     ht = HashTable(4)
-    ht.add_data("hi", "there")
-    ht.add_data("hi", "hello")
-    ht.add_data("hi", "human")
-    ht.add_data("title", "Jack and jill")
-    print(ht.get_value("title"))
+    ht.add_data("title", "Jack and Jill")
+    ht.add_data("body", "Hello World, learn Programming")
+    ht.add_data("date", "22-3-15")
+    ht.add_data("user_id", 2)
+    # print(ht.get_value("title"))
+    print(ht.get_value('title'))
+    print(ht.get_value('body'))
+    print(ht.get_value('date'))
+    print(ht.get_value('user_id'))
     ht.print_table()
