@@ -1,3 +1,4 @@
+from operator import pos
 from flask import Flask, json, jsonify, request
 from sqlite3 import Connection as SQLite3Connection
 from datetime import date, datetime
@@ -5,9 +6,11 @@ from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql.operators import json_getitem_op
+import random
 
 from linked_list import LinkedList
 from hash_table import HashTable
+from binary_search_tree import BST
 
 
 # configure sqlite3 to enforce foreign key constraints
@@ -144,9 +147,27 @@ def create_blog_post(user_id):
     return jsonify({"message": "Blog Post added Successfully"}), 200
 
 
-@app.route("/blog_post/<user_id>", methods=['GET'])
-def get_all_blog_post(user_id):
-    pass
+@app.route("/blog_post/<blog_post_id>", methods=['GET'])
+def get_all_blog_posts(blog_post_id):
+    blog_posts = BlogPost.query.all()
+    random.shuffle(blog_posts)
+
+    bst = BST()
+
+    for post in blog_posts:
+        bst.insert({
+            "id": post.id,
+            "title": post.title,
+            "body": post.body,
+            "user_id": post.user_id,
+        })
+
+    post = bst.search(blog_post_id)
+
+    if not post:
+        return jsonify({"message": "Blog Post not found"}), 404
+
+    return jsonify(post), 200
 
 
 @app.route("/blog_post/<blog_post_id>", methods=['GET'])
