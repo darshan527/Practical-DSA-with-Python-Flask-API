@@ -1,11 +1,13 @@
-from flask import Flask, jsonify, request
+from flask import Flask, json, jsonify, request
 from sqlite3 import Connection as SQLite3Connection
 from datetime import date, datetime
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql.operators import json_getitem_op
 
 from linked_list import LinkedList
+from hash_table import HashTable
 
 
 # configure sqlite3 to enforce foreign key constraints
@@ -122,7 +124,24 @@ def delete_user_id(user_id):
 # Blogpost routes
 @app.route("/blog_post/<user_id>", methods=["POST"])
 def create_blog_post(user_id):
-    pass
+    user = User.query.filter_by(id=user_id).first()
+    data = request.get_json()
+    if not user:
+        return jsonify({"message": "User does not exist"}), 404
+    ht = HashTable(5)
+
+    ht.add_data("title", data['title'])
+    ht.add_data("body", data['body'])
+    ht.add_data("date", now)
+    ht.add_data("user_id", user_id)
+
+    new_blogpost = BlogPost(title=ht.get_value('title'),
+                            body=ht.get_value('body'),
+                            date=ht.get_value('date'),
+                            user_id=ht.get_value('user_id'))
+    db.session.add(new_blogpost)
+    db.session.commit()
+    return jsonify({"message": "Blog Post added Successfully"}), 200
 
 
 @app.route("/blog_post/<user_id>", methods=['GET'])
