@@ -148,7 +148,7 @@ def create_blog_post(user_id):
 
 
 @app.route("/blog_post/<blog_post_id>", methods=['GET'])
-def get_all_blog_posts(blog_post_id):
+def get_one_blog_posts(blog_post_id):
     blog_posts = BlogPost.query.all()
     random.shuffle(blog_posts)
 
@@ -170,9 +170,18 @@ def get_all_blog_posts(blog_post_id):
     return jsonify(post), 200
 
 
-@app.route("/blog_post/<blog_post_id>", methods=['GET'])
-def get_one_blog_post(blog_post_id):
-    pass
+@app.route("/blog_post/all", methods=['GET'])
+def get_all_blog_post():
+    posts = BlogPost.query.all()
+    lst = []
+    for post in posts:
+        lst.append({
+            "id": post.id,
+            "title": post.title,
+            "body": post.body,
+            "user_id": post.user_id,
+        })
+    return jsonify(lst), 200
 
 
 @app.route("/blog_post/<blog_post_id>", methods=['DELETE'])
