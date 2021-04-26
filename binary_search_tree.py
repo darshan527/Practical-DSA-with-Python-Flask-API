@@ -14,14 +14,20 @@ class BST:
             if root.left is None:
                 root.left = Node(data)
             else:
-                self._insert_recursive(data['id'], root.left)
+                self._insert_recursive(data, root.left)
         elif data['id'] > root.data['id']:
             if root.right is None:
                 root.right = Node(data)
             else:
-                self._insert_recursive(data['id'], root.right)
+                self._insert_recursive(data, root.right)
         else:
             return
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+        else:
+            self._insert_recursive(data, self.root)
 
     def search_blog(self, blog_id):
         return self.search(int(blog_id), self.root)
@@ -39,12 +45,6 @@ class BST:
                 return self.search(id, node.right)
             else:
                 return False
-
-    def insert(self, data):
-        if self.root is None:
-            self.root = Node(data)
-        else:
-            self._insert_recursive(data, self.root)
 
 
 if __name__ == "__main__":
