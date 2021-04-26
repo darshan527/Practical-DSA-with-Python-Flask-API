@@ -23,17 +23,20 @@ class BST:
         else:
             return
 
+    def search_blog(self, blog_id):
+        return self.search(int(blog_id), self.root)
+
     def search(self, id, node):
         if node is None:
             return False
-        if node.data['id'] is int(id):
+        if node.data['id'] is id:
             return node.data
         else:
-            if int(id) < node.data['id']:
-                self.search(id, node.left)
+            if id < node.data['id']:
+                return self.search(id, node.left)
 
-            elif int(id) > node.data['id']:
-                self.search(id, node.right)
+            elif id > node.data['id']:
+                return self.search(id, node.right)
             else:
                 return False
 
@@ -42,3 +45,22 @@ class BST:
             self.root = Node(data)
         else:
             self._insert_recursive(data, self.root)
+
+
+if __name__ == "__main__":
+    bst = BST()
+    d = {
+        "body": "Hello world",
+        "id": 6,
+        "title": "Century share visit phone should could.",
+        "user_id": 42
+    }
+    d1 = {
+        "body": "Hello moon",
+        "id": 2,
+        "title": " visit phone should could.",
+        "user_id": 2
+    }
+    bst.insert(d)
+    bst.insert(d1)
+    print(bst.search_blog(2))
