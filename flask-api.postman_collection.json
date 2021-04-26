@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "cf13c9cb-c212-41be-8aab-1245bb08194f",
+		"name": "flask-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create_user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Rahul\",\n\t\"email\": \"rahul@email.com\",\n\t\"address\": \"XYZ, NY\",\n\t\"phone\": \"9876543210\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_blogpost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Jack and Jill\",\n    \"body\": \"Hello World, learn Programming\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/blog_post/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"blog_post",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users list in descending",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/descending_id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"descending_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users in ascending",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/ascending_id",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"ascending_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user details from user Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/25",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User using user_id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"1"
+					]
+				},
+				"description": "http://127.0.0.1:5000/user/<user_id>"
+			},
+			"response": []
+		},
+		{
+			"name": "get all blogposts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/blog_post/all",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"blog_post",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search blog post using blog id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/blog_post/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"blog_post",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete blogpost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
