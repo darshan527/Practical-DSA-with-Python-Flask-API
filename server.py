@@ -186,7 +186,12 @@ def get_all_blog_post():
 
 @app.route("/blog_post/<blog_post_id>", methods=['DELETE'])
 def delete_blog_post(blog_post_id):
-    pass
+    post = BlogPost.query.filter_by(id=blog_post_id).first()
+    if not post:
+        return jsonify({"message": "Blog Post not found"}), 404
+    db.session.delete(post)
+    db.session.commit()
+    return jsonify({"message": "Post deleted Successfully"}), 200
 
 
 if __name__ == "__main__":
