@@ -162,7 +162,7 @@ def get_one_blog_posts(blog_post_id):
             "user_id": post.user_id,
         })
 
-    post = bst.search(blog_post_id)
+    post = bst.search_blog(blog_post_id)
 
     if not post:
         return jsonify({"message": "Blog Post not found"}), 404
